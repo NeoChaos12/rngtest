@@ -15,9 +15,9 @@ wid = 420
 
 bit_generator = Philox(seed + wid)  # Unlike MT19937 (np.random.RandomState), this is safe to do with Philox
 rngtest.set_rng(bit_generator)
-
 a = [f1() for _ in range(10)]
-rngtest.set_rng([wid, seed])
+
+bit_generator = Philox(seed + wid)  # Unlike MT19937 (np.random.RandomState), this is safe to do with Philox
+rngtest.set_rng(bit_generator)
 b = [f1() for _ in range(5)] + [f2() for _ in range(5)]
-print(a == b)
-print(a)
+print(f"Verifying if the reseeding was successful: {a == b}")
