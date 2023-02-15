@@ -26,4 +26,3 @@ for wid, worker_seed in enumerate(ss.spawn(nworkers)):
     arrs.append(a)
 
 print(f"Verifying if the workers generated different numbers: {not any([x == y for x, y in combinations(arrs, 2)])}")
-# TODO: Fix
