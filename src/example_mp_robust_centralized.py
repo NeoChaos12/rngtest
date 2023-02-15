@@ -6,6 +6,7 @@ master-worker setup such that the master knows in advance how many workers it ne
 import rngtest
 from rngtest.sub1.sub1test import f1, f2
 from numpy.random import SeedSequence, Philox
+from itertools import combinations
 
 main_seed = 100
 nworkers = 10
@@ -24,5 +25,5 @@ for wid, worker_seed in enumerate(ss.spawn(nworkers)):
     print(f"Worker [{wid}] - Verifying if the RNG state was shared across functions of the same library: {a == b}")
     arrs.append(a)
 
-print(f"Verifying if the workers generated different numbers: {not any([x == y for x in arrs[:-1] for y in arrs[1:]])}")
+print(f"Verifying if the workers generated different numbers: {not any([x == y for x, y in combinations(arrs, 2)])}")
 # TODO: Fix
